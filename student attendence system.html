@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Attendance System</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            width: 80%;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        input {
+            padding: 10px;
+            margin: 5px;
+            width: 250px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px 5px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Student Attendance System</h1>
+    <p>Agile Software Project</p>
+</header>
+
+<div class="container">
+
+    <h2>Student Registration</h2>
+
+    <input type="text" id="studentName" placeholder="Enter Student Name">
+    <input type="text" id="studentRoll" placeholder="Enter Roll Number">
+
+    <button onclick="registerStudent()">Register Student</button>
+
+    <h2>Mark Attendance</h2>
+
+    <button onclick="markAttendance()">Mark Present</button>
+
+    <h2>Attendance Records</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Roll No</th>
+                <th>Student Name</th>
+                <th>Attendance</th>
+            </tr>
+        </thead>
+
+        <tbody id="attendanceTable">
+        </tbody>
+    </table>
+
+</div>
+
+<script>
+
+    let students = [];
+
+    function registerStudent() {
+
+        let name = document.getElementById("studentName").value;
+        let roll = document.getElementById("studentRoll").value;
+
+        if (name === "" || roll === "") {
+            alert("Please enter Student Name and Roll Number");
+            return;
+        }
+
+        students.push({
+            name: name,
+            roll: roll,
+            attendance: "Absent"
+        });
+
+        alert("Student Registered Successfully");
+
+        document.getElementById("studentName").value = "";
+        document.getElementById("studentRoll").value = "";
+
+        displayStudents();
+    }
+
+    function markAttendance() {
+
+        if (students.length === 0) {
+            alert("Please register a student first");
+            return;
+        }
+
+        students[students.length - 1].attendance = "Present";
+
+        displayStudents();
+
+        alert("Attendance Marked Successfully");
+    }
+
+    function displayStudents() {
+
+        let table = document.getElementById("attendanceTable");
+
+        table.innerHTML = "";
+
+        students.forEach(function(student) {
+
+            let row = `
+                <tr>
+                    <td>${student.roll}</td>
+                    <td>${student.name}</td>
+                    <td>${student.attendance}</td>
+                </tr>
+            `;
+
+            table.innerHTML += row;
+        });
+    }
+
+</script>
+
+</body>
+</html>
