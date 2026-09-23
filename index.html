@@ -83,6 +83,7 @@
     <h2>Mark Attendance</h2>
 
     <button onclick="markAttendance()">Mark Present</button>
+    <button onclick="displayStudents()">View Attendance</button>
 
     <h2>Attendance Records</h2>
 
@@ -128,6 +129,20 @@
 
         displayStudents();
     }
+
+    function viewAttendance() {
+
+    let result = document.getElementById("attendanceResult");
+
+    if (students.length === 0) {
+        result.innerHTML = "No attendance records available.";
+        return;
+    }
+
+    result.innerHTML = "<h3>Attendance Records Available</h3>";
+
+    displayStudents();
+}
 
     function markAttendance() {
 
